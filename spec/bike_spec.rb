@@ -1,9 +1,7 @@
 require 'bike'
 
-describe 'Bike' do
-  it 'can check for working bike' do
-    bike = Bike.new
-    expect(bike).to respond_to(:working?)
-  end
+describe Bike do
+
+  it {is_expected.to respond_to :working?}
 
 end
