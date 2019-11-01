@@ -28,7 +28,7 @@ describe DockingStation do
   end
 
   it 'raises an error if there are too many bikes' do
-    DockingStation::DEFAULT_CAPACITY.times {subject.dock_bike(Bike.new)}
+    subject.capacity.times {subject.dock_bike(Bike.new)}
     expect { subject.dock_bike Bike.new }.to raise_error("full")
   end
 
