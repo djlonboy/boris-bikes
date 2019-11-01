@@ -12,14 +12,14 @@ describe DockingStation do
 
   it { is_expected.to respond_to :dock_bike }
 
-  it 'has instance variable for storing bikes' do
-    expect(subject.bike).to eq(nil)
+  it 'docking station can store many bikes' do
+    expect(subject.bikes).to eq([])
   end
 
   it 'can save a docked bike' do
     test_bike = Bike.new
     subject.dock_bike(test_bike)
-    expect(subject.bike).to eq(test_bike)
+    expect(subject.bikes).to include(test_bike)
   end
 
   it 'raises an error if there are no bikes' do
@@ -27,9 +27,8 @@ describe DockingStation do
     expect { docking_station.release_bike }.to raise_error("no bikes")
   end
 
-  it 'raises an error if there already is a bike' do
-    test_bike = Bike.new
-    subject.dock_bike(test_bike)
+  it 'raises an error if there are too many bikes' do
+    20.times {subject.dock_bike(Bike.new)}
     expect { subject.dock_bike Bike.new }.to raise_error("full")
   end
 
